@@ -22,7 +22,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 MAX_FRAMES  = 30    
 MIN_FRAMES  = 8     
 N_WORKERS   = 8    
-POSE_UPPER_BODY = [0, 11, 12, 13, 14, 15, 16, 23, 24] 
+# 2 ve 5: Gözler | 7 ve 8: Kulaklar
+POSE_UPPER_BODY = [0, 2, 5, 7, 8, 11, 12, 13, 14, 15, 16, 23, 24]
 
 HAND_MODEL_URL  = "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task"
 POSE_MODEL_URL  = "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task"
