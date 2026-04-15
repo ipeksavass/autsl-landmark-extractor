@@ -40,7 +40,7 @@ def ensure_models():
 def resample_frames(frames, target=MAX_FRAMES):
     n = len(frames)
     if n == 0: 
-        return np.zeros((target, 153), dtype=np.float32)
+        return np.zeros((target, 165), dtype=np.float32)
 
     indices = np.linspace(0, n - 1, target)
     resampled = []
@@ -51,7 +51,7 @@ def resample_frames(frames, target=MAX_FRAMES):
         frame_vector = []
         
         pa, pb = frames[lo].get("pose"), frames[hi].get("pose")
-        if pa is None and pb is None: frame_vector.extend([0.0] * 27)
+        if pa is None and pb is None: frame_vector.extend([0.0] * 39)
         elif pa is None: frame_vector.extend(pb)
         elif pb is None: frame_vector.extend(pa)
         else: frame_vector.extend((np.array(pa) * (1 - t) + np.array(pb) * t).tolist())
@@ -145,8 +145,8 @@ def extract_worker(args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", default=r" ... ")  # dataset klasörünüzün yolunu verin
-    parser.add_argument("--output",  default=r" ... ")  # boş bir 'landmarks_npy' klasörü açın ve onun yolunu verin
+    parser.add_argument("--dataset", default=r"C:\Users\ipekk\OneDrive\Masaüstü\dataset")  # dataset klasörünüzün yolunu verin
+    parser.add_argument("--output",  default=r"C:\Users\ipekk\OneDrive\Masaüstü\landmarks_npy")  # boş bir 'landmarks_npy' klasörü açın ve onun yolunu verin
     parser.add_argument("--workers", type=int, default=N_WORKERS)
     args = parser.parse_args()
 
@@ -186,7 +186,7 @@ def main():
     print(f"\n{'─'*52}")
     print(f"  Bulunan Kelime Sayısı  : {len(bulunan_kelime_klasorleri)}")
     print(f"  Toplam İşlenecek Video : {len(tasks)}")
-    print(f"  Çıktı Formatı          : .npy (30, 153)")
+    print(f"  Çıktı Formatı          : .npy (30, 165)")
     print(f"{'─'*52}\n")
 
     if len(tasks) == 0:
