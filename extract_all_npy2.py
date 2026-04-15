@@ -36,7 +36,7 @@ def ensure_models():
 
 def resample_frames(frames, target=MAX_FRAMES):
     n = len(frames)
-    if n == 0: return np.zeros((target, 153), dtype=np.float32)
+    if n == 0: return np.zeros((target, 165), dtype=np.float32)
     indices = np.linspace(0, n - 1, target)
     resampled = []
     for idx in indices:
@@ -45,7 +45,7 @@ def resample_frames(frames, target=MAX_FRAMES):
         frame_vector = []
         
         pa, pb = frames[lo].get("pose"), frames[hi].get("pose")
-        if pa is None and pb is None: frame_vector.extend([0.0] * 27)
+        if pa is None and pb is None: frame_vector.extend([0.0] * 39) #(13 nokta x 3)
         elif pa is None: frame_vector.extend(pb)
         elif pb is None: frame_vector.extend(pa)
         else: frame_vector.extend((np.array(pa) * (1 - t) + np.array(pb) * t).tolist())
